@@ -53,13 +53,13 @@ export default () => (
           </div>
         </main>
 
-        {data.moviesAll.movies.map(item => (
+        {/* {data.moviesAll.movies.map(item => (
           <div key={item.id}>
             <h1>
               {item.name} ---- {item.id}
             </h1>
           </div>
-        ))}
+        ))} */}
       </Layout>
     )}
   />

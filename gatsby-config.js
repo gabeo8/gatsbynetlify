@@ -1,3 +1,6 @@
+const fetch = require(`node-fetch`)
+const { createHttpLink } = require(`apollo-link-http`)
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
@@ -28,5 +31,22 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
+
+    {
+      resolve: 'gatsby-source-graphql', // <- Configure plugin
+      options: {
+        typeName: 'moviesAll',
+        fieldName: 'moviesAll', // <- fieldName under which schema will be stitched
+        createLink: () =>
+          createHttpLink({
+            uri: `https://movie-api-xxx.herokuapp.com/v1alpha1/graphql`, // <- Configure connection GraphQL url
+            headers: {
+              ContentType: 'application/json',
+            },
+            fetch,
+          }),
+        refetchInterval: 10, // Refresh every 10 seconds for new data
+      },
+    },
   ],
 }
